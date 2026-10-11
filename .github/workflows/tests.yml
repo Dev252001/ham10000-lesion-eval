@@ -1,0 +1,39 @@
+﻿# .github/workflows/tests.yml
+#
+# Runs pytest on push and pull_request using a CPU-only PyTorch install.
+#
+# NOTE: This workflow has not been run locally and its correctness cannot
+# be verified here. It follows the standard pattern for PyTorch CPU CI
+# on GitHub Actions but must be validated after the repository is pushed.
+
+name: tests
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install CPU PyTorch
+        run: |
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Install project dependencies
+        run: |
+          pip install pandas numpy scikit-learn matplotlib Pillow kaggle pytest nbformat
+
+      - name: Run tests
+        run: |
+          pytest tests/ -W ignore --tb=short -q
