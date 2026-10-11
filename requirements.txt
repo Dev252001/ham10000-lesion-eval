@@ -1,0 +1,18 @@
+﻿# Core data / ML
+pandas
+numpy
+scikit-learn
+matplotlib
+Pillow
+
+# Explainability
+grad-cam
+
+# Dataset download
+kaggle
+
+# Testing
+pytest
+
+# torch and torchvision are NOT pinned here; Google Colab pre-installs them.
+# Install locally with: pip install torch torchvision

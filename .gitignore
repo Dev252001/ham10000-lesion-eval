@@ -1,0 +1,42 @@
+﻿# Data (never committed; download via kaggle)
+data/
+
+# Model checkpoints (large binaries)
+outputs/models/
+
+# Kaggle credentials
+kaggle.json
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb~
+
+# OS artefacts
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Colab / nbconvert artefacts
+*.nbconvert.ipynb
+
+# outputs sub-dirs that ARE tracked stay out of this file;
+# metrics/, predictions/, figures/, splits/ are tracked via .gitkeep

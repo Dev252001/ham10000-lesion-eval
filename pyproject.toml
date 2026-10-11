@@ -1,0 +1,18 @@
+﻿[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "skinlesion"
+version = "0.1.0"
+description = "HAM10000 skin-lesion classification with leakage-aware evaluation"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths  = ["tests"]
+addopts    = "-ra -q"
