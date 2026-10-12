@@ -42,7 +42,16 @@ lesions. An image-level split is run only to quantify leakage.
 ## Dataset
 
 <!-- BEGIN DATASET -->
-Not yet run.
+| Class | Images | Unique lesions |
+|---|---|---|
+| akiec | 327 | 228 |
+| bcc | 514 | 327 |
+| bkl | 1099 | 727 |
+| df | 115 | 73 |
+| mel | 1113 | 614 |
+| nv | 6705 | 5403 |
+| vasc | 142 | 98 |
+
 <!-- END DATASET -->
 
 **Citation:** Tschandl, P., Rosendahl, C. & Kittler, H.
@@ -63,7 +72,7 @@ Dataset available via the
 <!-- BEGIN STAGES -->
 | Notebook | Status |
 |---|---|
-| 01 | Code ready, not yet run |
+| 01 | Complete |
 | 02 | Complete |
 | 03 | Complete |
 | 04 | Code ready, not yet run |
