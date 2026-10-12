@@ -1,0 +1,113 @@
+{
+  "split_mode": "image",
+  "seed": 42,
+  "per_class": {
+    "akiec": {
+      "train": {
+        "images": 229,
+        "lesions": 177
+      },
+      "val": {
+        "images": 49,
+        "lesions": 47
+      },
+      "test": {
+        "images": 49,
+        "lesions": 45
+      }
+    },
+    "bcc": {
+      "train": {
+        "images": 360,
+        "lesions": 268
+      },
+      "val": {
+        "images": 77,
+        "lesions": 73
+      },
+      "test": {
+        "images": 77,
+        "lesions": 70
+      }
+    },
+    "bkl": {
+      "train": {
+        "images": 769,
+        "lesions": 573
+      },
+      "val": {
+        "images": 165,
+        "lesions": 157
+      },
+      "test": {
+        "images": 165,
+        "lesions": 153
+      }
+    },
+    "df": {
+      "train": {
+        "images": 80,
+        "lesions": 61
+      },
+      "val": {
+        "images": 18,
+        "lesions": 17
+      },
+      "test": {
+        "images": 17,
+        "lesions": 17
+      }
+    },
+    "mel": {
+      "train": {
+        "images": 779,
+        "lesions": 519
+      },
+      "val": {
+        "images": 167,
+        "lesions": 150
+      },
+      "test": {
+        "images": 167,
+        "lesions": 151
+      }
+    },
+    "nv": {
+      "train": {
+        "images": 4693,
+        "lesions": 4015
+      },
+      "val": {
+        "images": 1006,
+        "lesions": 968
+      },
+      "test": {
+        "images": 1006,
+        "lesions": 963
+      }
+    },
+    "vasc": {
+      "train": {
+        "images": 99,
+        "lesions": 77
+      },
+      "val": {
+        "images": 21,
+        "lesions": 18
+      },
+      "test": {
+        "images": 22,
+        "lesions": 20
+      }
+    }
+  },
+  "leakage": {
+    "lesions_in_train_and_val": 510,
+    "lesions_in_train_and_test": 484,
+    "lesions_in_val_and_test": 119,
+    "val_images_with_train_lesion": 542,
+    "test_images_with_train_lesion": 523,
+    "val_share_with_train_lesion": 0.3606,
+    "test_share_with_train_lesion": 0.348
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "split_mode": "lesion",
+  "seed": 42,
+  "per_class": {
+    "akiec": {
+      "train": {
+        "images": 231,
+        "lesions": 160
+      },
+      "val": {
+        "images": 51,
+        "lesions": 34
+      },
+      "test": {
+        "images": 45,
+        "lesions": 34
+      }
+    },
+    "bcc": {
+      "train": {
+        "images": 366,
+        "lesions": 229
+      },
+      "val": {
+        "images": 73,
+        "lesions": 49
+      },
+      "test": {
+        "images": 75,
+        "lesions": 49
+      }
+    },
+    "bkl": {
+      "train": {
+        "images": 761,
+        "lesions": 509
+      },
+      "val": {
+        "images": 174,
+        "lesions": 109
+      },
+      "test": {
+        "images": 164,
+        "lesions": 109
+      }
+    },
+    "df": {
+      "train": {
+        "images": 80,
+        "lesions": 51
+      },
+      "val": {
+        "images": 14,
+        "lesions": 11
+      },
+      "test": {
+        "images": 21,
+        "lesions": 11
+      }
+    },
+    "mel": {
+      "train": {
+        "images": 787,
+        "lesions": 430
+      },
+      "val": {
+        "images": 167,
+        "lesions": 92
+      },
+      "test": {
+        "images": 159,
+        "lesions": 92
+      }
+    },
+    "nv": {
+      "train": {
+        "images": 4699,
+        "lesions": 3781
+      },
+      "val": {
+        "images": 1005,
+        "lesions": 811
+      },
+      "test": {
+        "images": 1001,
+        "lesions": 811
+      }
+    },
+    "vasc": {
+      "train": {
+        "images": 94,
+        "lesions": 68
+      },
+      "val": {
+        "images": 23,
+        "lesions": 15
+      },
+      "test": {
+        "images": 25,
+        "lesions": 15
+      }
+    }
+  },
+  "leakage": {
+    "lesions_in_train_and_val": 0,
+    "lesions_in_train_and_test": 0,
+    "lesions_in_val_and_test": 0,
+    "val_images_with_train_lesion": 0,
+    "test_images_with_train_lesion": 0,
+    "val_share_with_train_lesion": 0.0,
+    "test_share_with_train_lesion": 0.0
+  }
+}

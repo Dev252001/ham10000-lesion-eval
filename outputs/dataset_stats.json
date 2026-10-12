@@ -1,0 +1,46 @@
+{
+  "per_class": {
+    "akiec": {
+      "images": 327,
+      "lesions": 228
+    },
+    "bcc": {
+      "images": 514,
+      "lesions": 327
+    },
+    "bkl": {
+      "images": 1099,
+      "lesions": 727
+    },
+    "df": {
+      "images": 115,
+      "lesions": 73
+    },
+    "mel": {
+      "images": 1113,
+      "lesions": 614
+    },
+    "nv": {
+      "images": 6705,
+      "lesions": 5403
+    },
+    "vasc": {
+      "images": 142,
+      "lesions": 98
+    }
+  },
+  "image_level": {
+    "majority_class": "nv",
+    "majority_count": 6705,
+    "minority_class": "df",
+    "minority_count": 115,
+    "imbalance_ratio": 58.3043
+  },
+  "lesion_level": {
+    "majority_class": "nv",
+    "majority_count": 5403,
+    "minority_class": "df",
+    "minority_count": 73,
+    "imbalance_ratio": 74.0137
+  }
+}
