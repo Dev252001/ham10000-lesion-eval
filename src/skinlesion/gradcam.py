@@ -55,7 +55,7 @@ def _get_target_layer(model, model_name: str):
     elif name == "efficientnet_b0":
         return model.features[-1]
     elif name == "baseline_cnn":
-        return model.blocks[-1]
+        return model.features[-1]
     else:
         raise ValueError(
             f"Unknown model name for Grad-CAM target layer: {model_name!r}"
