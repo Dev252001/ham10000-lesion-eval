@@ -1,0 +1,148 @@
+{
+  "model_name": "baseline_cnn",
+  "split_mode": "lesion",
+  "seed": 42,
+  "config": {
+    "model_name": "baseline_cnn",
+    "split_mode": "lesion",
+    "seed": 42,
+    "image_size": 224,
+    "batch_size": 32,
+    "max_epochs": 20,
+    "patience": 5,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "selection_rule": "best validation macro-F1; tie-break lower validation loss",
+    "manifest_sha256": "b7ec32d4046429d62a7edab8b0d5157df2277e11e9a829c8a2e79c5cf697f006"
+  },
+  "metrics": {
+    "accuracy": 0.5516778523489932,
+    "macro_f1": 0.335635609317562,
+    "weighted_f1": 0.59915395283786,
+    "balanced_accuracy": 0.43782163621227455,
+    "per_class": {
+      "akiec": {
+        "precision": 0.2222222222222222,
+        "recall": 0.13333333333333333,
+        "f1": 0.16666666666666666,
+        "support": 45
+      },
+      "bcc": {
+        "precision": 0.21348314606741572,
+        "recall": 0.5066666666666667,
+        "f1": 0.30039525691699603,
+        "support": 75
+      },
+      "bkl": {
+        "precision": 0.27491408934707906,
+        "recall": 0.4878048780487805,
+        "f1": 0.3516483516483517,
+        "support": 164
+      },
+      "df": {
+        "precision": 0.125,
+        "recall": 0.09523809523809523,
+        "f1": 0.10810810810810811,
+        "support": 21
+      },
+      "mel": {
+        "precision": 0.3442622950819672,
+        "recall": 0.5283018867924528,
+        "f1": 0.41687344913151364,
+        "support": 159
+      },
+      "nv": {
+        "precision": 0.9443561208267091,
+        "recall": 0.5934065934065934,
+        "f1": 0.7288343558282209,
+        "support": 1001
+      },
+      "vasc": {
+        "precision": 0.17142857142857143,
+        "recall": 0.72,
+        "f1": 0.27692307692307694,
+        "support": 25
+      }
+    },
+    "confusion_matrix": [
+      [
+        6,
+        23,
+        3,
+        3,
+        3,
+        3,
+        4
+      ],
+      [
+        5,
+        38,
+        11,
+        1,
+        0,
+        1,
+        19
+      ],
+      [
+        8,
+        23,
+        80,
+        5,
+        17,
+        12,
+        19
+      ],
+      [
+        0,
+        11,
+        5,
+        2,
+        0,
+        1,
+        2
+      ],
+      [
+        6,
+        16,
+        28,
+        0,
+        84,
+        18,
+        7
+      ],
+      [
+        2,
+        64,
+        162,
+        5,
+        138,
+        594,
+        36
+      ],
+      [
+        0,
+        3,
+        2,
+        0,
+        2,
+        0,
+        18
+      ]
+    ],
+    "malignant_recall": 0.38943396226415095
+  },
+  "n_params": 390695,
+  "train_time_s": 834.192872497,
+  "epochs_run": 13,
+  "best_epoch": 8,
+  "git_commit": "8f207a6cc243ad0e8a8968cdf9d475929c8a663f",
+  "git_dirty": true,
+  "manifest_sha256": "b7ec32d4046429d62a7edab8b0d5157df2277e11e9a829c8a2e79c5cf697f006",
+  "library_versions": {
+    "torch": "2.11.0+cu130",
+    "torchvision": "0.26.0+cu130",
+    "scikit-learn": "1.6.1"
+  },
+  "device": "Tesla T4",
+  "created_utc": "2026-10-17T18:04:23.669793+00:00"
+}

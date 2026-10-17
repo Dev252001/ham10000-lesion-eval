@@ -1,0 +1,148 @@
+{
+  "model_name": "resnet18",
+  "split_mode": "lesion",
+  "seed": 42,
+  "config": {
+    "model_name": "resnet18",
+    "split_mode": "lesion",
+    "seed": 42,
+    "image_size": 224,
+    "batch_size": 32,
+    "max_epochs": 20,
+    "patience": 5,
+    "lr": 0.0003,
+    "weight_decay": 0.0001,
+    "selection_rule": "best validation macro-F1; tie-break lower validation loss",
+    "manifest_sha256": "b7ec32d4046429d62a7edab8b0d5157df2277e11e9a829c8a2e79c5cf697f006"
+  },
+  "metrics": {
+    "accuracy": 0.6751677852348993,
+    "macro_f1": 0.5413935624605738,
+    "weighted_f1": 0.7064050520445543,
+    "balanced_accuracy": 0.6664536278920606,
+    "per_class": {
+      "akiec": {
+        "precision": 0.2517482517482518,
+        "recall": 0.8,
+        "f1": 0.3829787234042553,
+        "support": 45
+      },
+      "bcc": {
+        "precision": 0.44166666666666665,
+        "recall": 0.7066666666666667,
+        "f1": 0.5435897435897435,
+        "support": 75
+      },
+      "bkl": {
+        "precision": 0.5050505050505051,
+        "recall": 0.6097560975609756,
+        "f1": 0.5524861878453039,
+        "support": 164
+      },
+      "df": {
+        "precision": 0.21951219512195122,
+        "recall": 0.42857142857142855,
+        "f1": 0.2903225806451613,
+        "support": 21
+      },
+      "mel": {
+        "precision": 0.3944954128440367,
+        "recall": 0.5408805031446541,
+        "f1": 0.4562334217506631,
+        "support": 159
+      },
+      "nv": {
+        "precision": 0.9497964721845319,
+        "recall": 0.6993006993006993,
+        "f1": 0.8055235903337169,
+        "support": 1001
+      },
+      "vasc": {
+        "precision": 0.6666666666666666,
+        "recall": 0.88,
+        "f1": 0.7586206896551724,
+        "support": 25
+      }
+    },
+    "confusion_matrix": [
+      [
+        36,
+        4,
+        3,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        13,
+        53,
+        2,
+        4,
+        0,
+        2,
+        1
+      ],
+      [
+        19,
+        13,
+        100,
+        1,
+        17,
+        14,
+        0
+      ],
+      [
+        5,
+        3,
+        1,
+        9,
+        3,
+        0,
+        0
+      ],
+      [
+        13,
+        10,
+        29,
+        0,
+        86,
+        20,
+        1
+      ],
+      [
+        57,
+        36,
+        63,
+        26,
+        110,
+        700,
+        9
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        22
+      ]
+    ],
+    "malignant_recall": 0.6825157232704403
+  },
+  "n_params": 11180103,
+  "train_time_s": 790.7002989529999,
+  "epochs_run": 12,
+  "best_epoch": 7,
+  "git_commit": "8f207a6cc243ad0e8a8968cdf9d475929c8a663f",
+  "git_dirty": true,
+  "manifest_sha256": "b7ec32d4046429d62a7edab8b0d5157df2277e11e9a829c8a2e79c5cf697f006",
+  "library_versions": {
+    "torch": "2.11.0+cu130",
+    "torchvision": "0.26.0+cu130",
+    "scikit-learn": "1.6.1"
+  },
+  "device": "Tesla T4",
+  "created_utc": "2026-10-17T19:01:07.645742+00:00"
+}
