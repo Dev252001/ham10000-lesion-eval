@@ -18,7 +18,11 @@ naive image-level split.
 ## Results
 
 <!-- BEGIN RESULTS -->
-Not yet run.
+| Model | Split | Accuracy | Macro-F1 | Macro-F1 95% CI | mel recall | bcc recall | akiec recall |
+|---|---|---|---|---|---|---|---|
+| baseline_cnn | lesion | 0.5517 | 0.3356 | — | 0.5283 | 0.5067 | 0.1333 |
+| efficientnet_b0 | lesion | 0.7705 | 0.6482 | — | 0.5157 | 0.8000 | 0.8667 |
+| resnet18 | lesion | 0.6752 | 0.5414 | — | 0.5409 | 0.7067 | 0.8000 |
 <!-- END RESULTS -->
 
 ---
