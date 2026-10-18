@@ -79,7 +79,7 @@ Dataset available via the
 | 01 | Complete |
 | 02 | Complete |
 | 03 | Complete |
-| 04 | Code ready, not yet run |
+| 04 | Code fixed, awaiting checkpoint from notebook 03 |
 | 05 | Complete |
 <!-- END STAGES -->
 
