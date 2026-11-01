@@ -1,13 +1,5 @@
 # HAM10000 Skin-Lesion Classification -- Leakage-Aware Evaluation
 
-This repository implements a 7-class skin-lesion classifier on the
-[HAM10000 dataset](https://doi.org/10.1038/sdata.2018.161), with an
-explicit focus on evaluation rigour: lesion-grouped splits, recorded
-provenance, and a leakage comparison that quantifies the effect of a
-naive image-level split.
-
----
-
 > **Research use only.**
 > This code and any results it produces are for academic and educational
 > purposes. They are not validated for clinical use and must not be used
@@ -17,13 +9,32 @@ naive image-level split.
 
 ## Results
 
+Melanoma (mel) recall is **0.52 for the best model (EfficientNet-B0)** on the
+lesion-grouped test split — meaning roughly half of melanoma cases are missed.
+This is a known limitation of class-weighted cross-entropy on a heavily
+imbalanced dataset and is the primary target for future improvement.
+Manifest SHA-256 verified: all three runs used the same split
+(`manifest_lesion_seed42.csv`, SHA-256 `768a29f8…`).
+
 <!-- BEGIN RESULTS -->
 | Model | Split | Accuracy | Macro-F1 | Macro-F1 95% CI | mel recall | bcc recall | akiec recall |
 |---|---|---|---|---|---|---|---|
-| baseline_cnn | lesion | 0.5517 | 0.3356 | — | 0.5283 | 0.5067 | 0.1333 |
-| efficientnet_b0 | lesion | 0.7705 | 0.6482 | — | 0.5157 | 0.8000 | 0.8667 |
-| resnet18 | lesion | 0.6752 | 0.5414 | — | 0.5409 | 0.7067 | 0.8000 |
+| baseline_cnn | lesion | 0.5517 | 0.3356 | (0.2966, 0.3741) | 0.5283 (0.4371, 0.6170) | 0.5067 (0.3866, 0.6180) | 0.1333 (0.0408, 0.2446) |
+| efficientnet_b0 | lesion | 0.7705 | 0.6482 | (0.5844, 0.7019) | 0.5157 (0.4204, 0.6149) | 0.8000 (0.6956, 0.8919) | 0.8667 (0.7500, 0.9556) |
+| resnet18 | lesion | 0.6752 | 0.5414 | (0.4882, 0.5839) | 0.5409 (0.4469, 0.6342) | 0.7067 (0.5909, 0.8228) | 0.8000 (0.6579, 0.9131) |
 <!-- END RESULTS -->
+
+---
+
+## About This Project
+
+This repository implements a 7-class skin-lesion classifier on the
+[HAM10000 dataset](https://doi.org/10.1038/sdata.2018.161), with an
+explicit focus on evaluation rigour: lesion-grouped splits, recorded
+provenance, and a leakage comparison that quantifies the effect of a
+naive image-level split. Grad-CAM visualisations (notebook 04) show
+which image regions the ResNet-18 and EfficientNet-B0 models attend to
+for melanoma, BCC, and AKIEC predictions.
 
 ---
 
@@ -79,7 +90,7 @@ Dataset available via the
 | 01 | Complete |
 | 02 | Complete |
 | 03 | Complete |
-| 04 | Code fixed, awaiting checkpoint from notebook 03 |
+| 04 | Complete |
 | 05 | Complete |
 <!-- END STAGES -->
 

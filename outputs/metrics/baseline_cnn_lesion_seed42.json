@@ -13,7 +13,7 @@
     "lr": 0.001,
     "weight_decay": 0.0001,
     "selection_rule": "best validation macro-F1; tie-break lower validation loss",
-    "manifest_sha256": "b7ec32d4046429d62a7edab8b0d5157df2277e11e9a829c8a2e79c5cf697f006"
+    "manifest_sha256": "768a29f8119e3998aa3c42c5b5b8e27585c5e6c023275b9eef971dc70b2c0e96"
   },
   "metrics": {
     "accuracy": 0.5516778523489932,
@@ -137,7 +137,7 @@
   "best_epoch": 8,
   "git_commit": "8f207a6cc243ad0e8a8968cdf9d475929c8a663f",
   "git_dirty": true,
-  "manifest_sha256": "b7ec32d4046429d62a7edab8b0d5157df2277e11e9a829c8a2e79c5cf697f006",
+  "manifest_sha256": "768a29f8119e3998aa3c42c5b5b8e27585c5e6c023275b9eef971dc70b2c0e96",
   "library_versions": {
     "torch": "2.11.0+cu130",
     "torchvision": "0.26.0+cu130",

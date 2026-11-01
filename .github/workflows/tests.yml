@@ -1,10 +1,6 @@
-﻿# .github/workflows/tests.yml
+# .github/workflows/tests.yml
 #
 # Runs pytest on push and pull_request using a CPU-only PyTorch install.
-#
-# NOTE: This workflow has not been run locally and its correctness cannot
-# be verified here. It follows the standard pattern for PyTorch CPU CI
-# on GitHub Actions but must be validated after the repository is pushed.
 
 name: tests
 
@@ -13,6 +9,7 @@ on:
     branches: ["**"]
   pull_request:
     branches: ["**"]
+  workflow_dispatch:
 
 jobs:
   pytest:

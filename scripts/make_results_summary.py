@@ -112,7 +112,10 @@ def build_summary(repo: Path) -> str | None:
     preds_dir = repo / "outputs" / "predictions"
     splits_dir = repo / "outputs" / "splits"
 
-    json_files = sorted(metrics_dir.glob("*.json")) if metrics_dir.exists() else []
+    json_files = sorted(
+        jf for jf in metrics_dir.glob("*.json")
+        if not jf.stem.endswith("_ci")
+    ) if metrics_dir.exists() else []
     if not json_files:
         return None
 

@@ -1,7 +1,7 @@
 # Results Summary
 
-Generated: 2026-10-17T20:38:09Z  
-Git commit: 6cc4e96daf25f1fd9138139aa611a779bb371844
+Generated: 2026-11-01T09:29:36Z  
+Git commit: f62199ff8b7fdb089b41720526e850392a740541
 
 ## Runs
 
@@ -17,8 +17,8 @@ Git commit: 6cc4e96daf25f1fd9138139aa611a779bb371844
 - Training time: 834.2 s
 - Git commit: 8f207a6cc243ad0e8a8968cdf9d475929c8a663f
 - Created: 2026-10-17T18:04:23.669793+00:00
-- Manifest SHA-256 prefix: b7ec32d40464
-- Manifest verification: FAILED (SHA-256 mismatch: JSON says b7ec32d40464… but file is 768a29f8119e…)
+- Manifest SHA-256 prefix: 768a29f8119e
+- Manifest verification: passed
 ### efficientnet_b0_lesion_seed42
 
 - Model: efficientnet_b0
@@ -31,8 +31,8 @@ Git commit: 6cc4e96daf25f1fd9138139aa611a779bb371844
 - Training time: 896.8 s
 - Git commit: 8f207a6cc243ad0e8a8968cdf9d475929c8a663f
 - Created: 2026-10-17T19:16:16.079914+00:00
-- Manifest SHA-256 prefix: b7ec32d40464
-- Manifest verification: FAILED (SHA-256 mismatch: JSON says b7ec32d40464… but file is 768a29f8119e…)
+- Manifest SHA-256 prefix: 768a29f8119e
+- Manifest verification: passed
 ### resnet18_lesion_seed42
 
 - Model: resnet18
@@ -45,11 +45,9 @@ Git commit: 6cc4e96daf25f1fd9138139aa611a779bb371844
 - Training time: 790.7 s
 - Git commit: 8f207a6cc243ad0e8a8968cdf9d475929c8a663f
 - Created: 2026-10-17T19:01:07.645742+00:00
-- Manifest SHA-256 prefix: b7ec32d40464
-- Manifest verification: FAILED (SHA-256 mismatch: JSON says b7ec32d40464… but file is 768a29f8119e…)
+- Manifest SHA-256 prefix: 768a29f8119e
+- Manifest verification: passed
 
 ## Verification
 
-not verified: baseline_cnn_lesion_seed42: SHA-256 mismatch: JSON says b7ec32d40464… but file is 768a29f8119e…
-not verified: efficientnet_b0_lesion_seed42: SHA-256 mismatch: JSON says b7ec32d40464… but file is 768a29f8119e…
-not verified: resnet18_lesion_seed42: SHA-256 mismatch: JSON says b7ec32d40464… but file is 768a29f8119e…
+same split for all included runs

@@ -1,0 +1,22 @@
+{
+  "macro_f1": {
+    "point": 0.5414,
+    "ci_lower": 0.4882,
+    "ci_upper": 0.5839
+  },
+  "mel_recall": {
+    "point": 0.5409,
+    "ci_lower": 0.4469,
+    "ci_upper": 0.6342
+  },
+  "bcc_recall": {
+    "point": 0.7067,
+    "ci_lower": 0.5909,
+    "ci_upper": 0.8228
+  },
+  "akiec_recall": {
+    "point": 0.8,
+    "ci_lower": 0.6579,
+    "ci_upper": 0.9131
+  }
+}

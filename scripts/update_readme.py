@@ -64,7 +64,10 @@ def render_results(repo: Path) -> str:
         lines.append("Not yet run.")
         return "\n".join(lines)
 
-    json_files = sorted(metrics_dir.glob("*.json"))
+    json_files = sorted(
+        jf for jf in metrics_dir.glob("*.json")
+        if not jf.stem.endswith("_ci")
+    )
     if not json_files:
         lines.append("Not yet run.")
         return "\n".join(lines)
