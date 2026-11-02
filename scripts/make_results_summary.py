@@ -115,6 +115,7 @@ def build_summary(repo: Path) -> str | None:
     json_files = sorted(
         jf for jf in metrics_dir.glob("*.json")
         if not jf.stem.endswith("_ci")
+        and jf.stem != "paired_bootstrap"
     ) if metrics_dir.exists() else []
     if not json_files:
         return None
@@ -234,9 +235,15 @@ def main(argv: list[str] | None = None) -> None:
         default=None,
         help="Output path (default: <repo>/outputs/RESULTS_SUMMARY.md)",
     )
+    parser.add_argument(
+        "--repo",
+        type=Path,
+        default=None,
+        help="Repository root (default: directory containing this script's parent)",
+    )
     args = parser.parse_args(argv)
 
-    repo = _REPO_DIR
+    repo = args.repo if args.repo else _REPO_DIR
     out_path = args.output if args.output else repo / "outputs" / "RESULTS_SUMMARY.md"
 
     summary = build_summary(repo)
