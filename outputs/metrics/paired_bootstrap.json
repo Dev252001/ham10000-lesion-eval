@@ -1,0 +1,25 @@
+{
+  "n_boot": 1000,
+  "seed": 0,
+  "interval_method": "percentile",
+  "resampling_unit": "lesion_id",
+  "comparisons": {
+    "efficientnet_b0_vs_resnet18_lesion": {
+      "metric": "macro_f1",
+      "split": "lesion",
+      "diff": 0.1068,
+      "ci_lower": 0.0536,
+      "ci_upper": 0.1601,
+      "note": "EfficientNet-B0 macro-F1 minus ResNet-18 macro-F1"
+    },
+    "resnet18_vs_baseline_cnn_lesion": {
+      "metric": "macro_f1",
+      "split": "lesion",
+      "diff": 0.2058,
+      "ci_lower": 0.1493,
+      "ci_upper": 0.2543,
+      "note": "ResNet-18 macro-F1 minus Baseline CNN macro-F1"
+    },
+    "efficientnet_b0_image_vs_lesion": null
+  }
+}

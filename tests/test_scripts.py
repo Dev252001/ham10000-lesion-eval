@@ -263,7 +263,7 @@ class TestMakeResultsSummary:
     def test_no_metrics_exits_1(self, script, fake_repo, tmp_path):
         out = tmp_path / "summary.md"
         with pytest.raises(SystemExit) as exc_info:
-            script.main(["--output", str(out)])
+            script.main(["--output", str(out), "--repo", str(fake_repo)])
         assert exc_info.value.code == 1
         assert not out.exists()
 

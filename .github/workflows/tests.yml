@@ -30,6 +30,7 @@ jobs:
       - name: Install project dependencies
         run: |
           pip install pandas numpy scikit-learn matplotlib Pillow kaggle pytest nbformat
+          pip install -e .
 
       - name: Run tests
         run: |

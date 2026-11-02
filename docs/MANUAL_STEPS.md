@@ -27,19 +27,23 @@ cells in order.  Save checkpoints to Drive between sessions.
 
 Notebook order:
 
-1. `01_data_and_splits.ipynb` " downloads data, saves `dataset_stats.json`,
+1. `01_data_and_splits.ipynb` — downloads data, saves `dataset_stats.json`,
    manifests and audits for both split modes.
-2. `02_baseline_cnn.ipynb` " trains BaselineCNN, saves metrics + predictions.
-3. `03_transfer_learning.ipynb` " trains ResNet-18 and EfficientNet-B0,
+2. `02_baseline_cnn.ipynb` — trains BaselineCNN, saves metrics + predictions.
+3. `03_transfer_learning.ipynb` — trains ResNet-18 and EfficientNet-B0,
    saves metrics + predictions.
-4. `04_gradcam.ipynb` " loads transfer checkpoints, saves Grad-CAM figures.
-5. `05_comparison.ipynb` " reads JSON/predictions only (no GPU needed),
+4. `04_gradcam.ipynb` — loads transfer checkpoints, saves Grad-CAM figures.
+5. `05_comparison.ipynb` — reads JSON/predictions only (no GPU needed),
    saves comparison bar chart.
+
+You will be prompted to upload `kaggle.json` (your Kaggle API key).  The
+file is never written into the repository.
 
 For the leakage comparison, re-run notebooks 02 and 03 with
 `SPLIT_MODE = "image"` in their parameter cell.
 
-For additional seeds, change `SEED` in the parameter cell.
+To test a branch before merging, change `REPO_BRANCH` in the parameter
+cell of each notebook.
 
 ---
 
@@ -65,30 +69,40 @@ After each notebook (or after a group of notebooks):
 ```bash
 python scripts/update_readme.py
 python scripts/make_results_summary.py
-git add README.md outputs/RESULTS_SUMMARY.md
+python scripts/make_leakage_figure.py
+python scripts/compute_paired_bootstrap.py   # re-run after committing predictions
+git add README.md outputs/
 git commit -m "update README and results summary"
 ```
 
 ---
 
-## 5. Final editorial steps
+## 5. Stage Status
 
-- In `README.md`, change "will use" to the present tense in the
-  Evaluation Protocol section once results exist.
-- Fill in the **Limitations** section (the HTML comment questions are
-  prompts; write your own answers in prose below each comment or
-  replace the comments).
-- Fill in the **What I Learned** section similarly.
-- Edit the AI assistance line:
-  `<!-- EDIT: state truthfully which parts of this project had AI assistance and which are my own work -->`
+| Notebook | Status |
+|---|---|
+| 01 | Complete |
+| 02 | Complete |
+| 03 | Complete |
+| 04 | Complete |
+| 05 | Complete |
 
 ---
 
-## 6. GitHub About text and topics
+## 6. Final editorial steps
 
-Set the repository description (350 characters or fewer, no results):
+- Fill in the `<!-- AUTHOR TO CONFIRM -->` block in `README.md`: state
+  truthfully which parts had AI assistance and which are your own work.
+- If you add more seeds or models, re-run the scripts in step 4.
 
-> HAM10000 skin-lesion classification with lesion-grouped, leakage-aware evaluation. Lesion-level stratified splits, manifest SHA-256 provenance, cluster bootstrap CIs, and a leakage comparison. Three models: baseline CNN, ResNet-18, EfficientNet-B0. Runs on free Colab T4.
+---
+
+## 7. GitHub About text and topics
+
+Set the repository description (160 characters or fewer, no results):
+
+> HAM10000 skin-lesion classification: lesion-grouped leakage-aware evaluation,
+> cluster bootstrap CIs, Grad-CAM. Three models on free Colab T4.
 
 Suggested topics: `deep-learning`, `skin-lesion`, `ham10000`,
 `pytorch`, `medical-imaging`, `grad-cam`, `reproducibility`.
@@ -97,10 +111,22 @@ Pin the repository on your profile.
 
 ---
 
-## 7. Old repository
+## 8. Tag v1.0
 
-Decide what to do with the old repository at
-`d:\HAM\ham10000-classifier`.  Options:
-- Archive it on GitHub (Settings -> Archive this repository).
+After merging `polish/review-ready` into `main`:
+
+```bash
+git checkout main
+git merge --no-ff polish/review-ready -m "merge polish/review-ready"
+git tag -a v1.0 -m "v1.0: review-ready snapshot"
+# git push origin main v1.0   # when ready to publish
+```
+
+---
+
+## 9. Old repository
+
+Decide what to do with any previous repository:
+- Archive it on GitHub (Settings → Archive this repository).
 - Add a README note pointing to this repository.
 - Delete it if it was never pushed.

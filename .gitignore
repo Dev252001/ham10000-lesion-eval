@@ -40,3 +40,5 @@ Thumbs.db
 
 # outputs sub-dirs that ARE tracked stay out of this file;
 # metrics/, predictions/, figures/, splits/ are tracked via .gitkeep
+# Local reference files (untracked)
+docs/INTERVIEW_QUESTIONS.md

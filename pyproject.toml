@@ -8,6 +8,20 @@ version = "0.1.0"
 description = "HAM10000 skin-lesion classification with leakage-aware evaluation"
 license = { file = "LICENSE" }
 requires-python = ">=3.9"
+dependencies = [
+    "pandas>=1.5,<4",
+    "numpy>=1.24,<3",
+    "scikit-learn>=1.2,<2",
+    "matplotlib>=3.6,<4",
+    "Pillow>=9.0,<13",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0,<11",
+    "grad-cam>=1.4",
+    "kaggle>=1.5",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

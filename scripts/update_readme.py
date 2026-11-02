@@ -67,6 +67,7 @@ def render_results(repo: Path) -> str:
     json_files = sorted(
         jf for jf in metrics_dir.glob("*.json")
         if not jf.stem.endswith("_ci")
+        and jf.stem != "paired_bootstrap"
     )
     if not json_files:
         lines.append("Not yet run.")
@@ -321,14 +322,15 @@ def update_blocks(path: Path, repo: Path) -> bool:
 
     text = raw.decode("utf-8")
 
-    # Check all three markers are present.
-    missing = []
-    for name in ("RESULTS", "DATASET", "STAGES"):
-        if f"<!-- BEGIN {name} -->" not in text:
-            missing.append(name)
+    # Check required markers are present.  STAGES is optional (it may have
+    # been moved to docs/MANUAL_STEPS.md).
+    required = [n for n in ("RESULTS", "DATASET", "STAGES")
+                if f"<!-- BEGIN {n} -->" in text]
+    missing = [n for n in ("RESULTS", "DATASET")
+               if f"<!-- BEGIN {n} -->" not in text]
     if missing:
         print(
-            f"ERROR: README is missing markers for: {', '.join(missing)}\n"
+            f"ERROR: README is missing required markers for: {', '.join(missing)}\n"
             "Add <!-- BEGIN X --> ... <!-- END X --> blocks and re-run.",
             file=sys.stderr,
         )

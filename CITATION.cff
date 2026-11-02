@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "HAM10000 Skin-Lesion Classification — Leakage-Aware Evaluation"
+authors:
+  - family-names: "Dev"
+    given-names: "Parth"
+    github: "Dev252001"
+repository-code: "https://github.com/Dev252001/ham10000-lesion-eval"
+license: MIT
+version: "0.1.0"
+date-released: "2026-11-02"
+abstract: >
+  Leakage-aware evaluation of 7-class skin-lesion classification on HAM10000.
+  Lesion-grouped, class-stratified 70/15/15 split with SHA-256 provenance.
+  Three models (baseline CNN, ResNet-18, EfficientNet-B0) evaluated with
+  cluster-bootstrap confidence intervals and a leakage quantification.
+keywords:
+  - deep-learning
+  - skin-lesion
+  - ham10000
+  - pytorch
+  - medical-imaging
+  - grad-cam
+  - reproducibility
+references:
+  - type: dataset
+    authors:
+      - family-names: "Tschandl"
+        given-names: "Philipp"
+      - family-names: "Rosendahl"
+        given-names: "Cliff"
+      - family-names: "Kittler"
+        given-names: "Harald"
+    title: "The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions"
+    journal: "Scientific Data"
+    volume: 5
+    year: 2018
+    doi: "10.1038/sdata.2018.161"

@@ -6,6 +6,7 @@ Public API
 predict                  : run inference; return y_true, y_pred, probabilities
 final_test_evaluation    : the ONLY function that consumes the test split
 cluster_bootstrap_ci     : 95% CI via lesion-cluster resampling
+paired_cluster_bootstrap : 95% CI for the macro-F1 difference between two models
 """
 
 from __future__ import annotations
@@ -379,4 +380,102 @@ def cluster_bootstrap_ci(
 
     lower = float(np.percentile(boot_scores, 2.5))
     upper = float(np.percentile(boot_scores, 97.5))
+    return point, lower, upper
+
+
+# ---------------------------------------------------------------------------
+# paired_cluster_bootstrap
+# ---------------------------------------------------------------------------
+
+
+def paired_cluster_bootstrap(
+    pred_df_a: pd.DataFrame,
+    pred_df_b: pd.DataFrame,
+    metric: str = "macro_f1",
+    n_boot: int = 1000,
+    seed: int = 0,
+) -> Tuple[float, float, float]:
+    """Estimate a 95% percentile CI for the difference in *metric* between
+    model A and model B by resampling shared lesion_id clusters.
+
+    The two DataFrames must cover the same test set (same image_id values in
+    the same order are not required, but both must have a ``lesion_id``
+    column).  Resampling is done on the union of lesion IDs that appear in
+    *both* frames so that each bootstrap replicate evaluates both models on
+    exactly the same subset.
+
+    Parameters
+    ----------
+    pred_df_a:
+        Predictions DataFrame for model A (same columns as ``cluster_bootstrap_ci``).
+    pred_df_b:
+        Predictions DataFrame for model B.
+    metric:
+        One of ``"macro_f1"`` or a class name from ``CLASSES`` (for recall).
+    n_boot:
+        Number of bootstrap iterations.
+    seed:
+        NumPy random seed for reproducibility.
+
+    Returns
+    -------
+    (point_diff, lower_95, upper_95)
+        ``point_diff`` = metric_A − metric_B on the full test sets.
+        The CI is for the paired difference under lesion resampling.
+
+    Raises
+    ------
+    ValueError
+        If the two DataFrames share no common lesion IDs, or if *metric* is
+        not recognised.
+    """
+    from sklearn.metrics import f1_score  # noqa: F401 – validates early
+
+    def _compute(df: pd.DataFrame) -> float:
+        from sklearn.metrics import f1_score
+        yt = df["y_true"].to_numpy()
+        yp = df["y_pred"].to_numpy()
+        if metric == "macro_f1":
+            return float(f1_score(yt, yp, average="macro", zero_division=0))
+        elif metric in CLASSES:
+            cls_idx = list(CLASSES).index(metric)
+            mask = yt == cls_idx
+            if mask.sum() == 0:
+                return 0.0
+            return float((yp[mask] == cls_idx).mean())
+        else:
+            raise ValueError(
+                f"Unknown metric {metric!r}. "
+                f"Choose 'macro_f1' or a class name from CLASSES."
+            )
+
+    # Build per-lesion lookup dictionaries for fast group retrieval.
+    groups_a = {lid: grp for lid, grp in pred_df_a.groupby("lesion_id")}
+    groups_b = {lid: grp for lid, grp in pred_df_b.groupby("lesion_id")}
+
+    shared_lesions = sorted(set(groups_a.keys()) & set(groups_b.keys()))
+    if not shared_lesions:
+        raise ValueError(
+            "pred_df_a and pred_df_b share no lesion_id values. "
+            "Both DataFrames must cover the same test set."
+        )
+
+    n_lesions = len(shared_lesions)
+    shared_arr = np.array(shared_lesions)
+
+    # Point estimate on full shared lesions.
+    full_a = pd.concat([groups_a[l] for l in shared_lesions], ignore_index=True)
+    full_b = pd.concat([groups_b[l] for l in shared_lesions], ignore_index=True)
+    point = _compute(full_a) - _compute(full_b)
+
+    rng = np.random.default_rng(seed)
+    boot_diffs: List[float] = []
+    for _ in range(n_boot):
+        sampled = rng.choice(shared_arr, size=n_lesions, replace=True)
+        boot_a = pd.concat([groups_a[l] for l in sampled], ignore_index=True)
+        boot_b = pd.concat([groups_b[l] for l in sampled], ignore_index=True)
+        boot_diffs.append(_compute(boot_a) - _compute(boot_b))
+
+    lower = float(np.percentile(boot_diffs, 2.5))
+    upper = float(np.percentile(boot_diffs, 97.5))
     return point, lower, upper
