@@ -25,6 +25,7 @@ from skinlesion.data import CLASSES, MALIGNANT
 from skinlesion.evaluate import (
     cluster_bootstrap_ci,
     final_test_evaluation,
+    paired_cluster_bootstrap,
     predict,
 )
 from skinlesion.models import BaselineCNN
@@ -440,3 +441,80 @@ class TestClusterBootstrapCI:
     def test_unknown_metric_raises(self, pred_df):
         with pytest.raises(ValueError, match="Unknown metric"):
             cluster_bootstrap_ci(pred_df, metric="unknown_metric", n_boot=10, seed=0)
+
+
+# ---------------------------------------------------------------------------
+# Tests: paired_cluster_bootstrap
+# ---------------------------------------------------------------------------
+
+class TestPairedClusterBootstrap:
+    """Unit tests on synthetic data — no GPU, no real predictions."""
+
+    @pytest.fixture(scope="class")
+    def df_pair(self):
+        """Two prediction DataFrames with the same lesion_id set."""
+        df_a = _make_pred_df(n_per_class=15, perfect=False, seed=0)
+        df_b = _make_pred_df(n_per_class=15, perfect=False, seed=1)
+        # Give both frames the same lesion_ids so they share a test set.
+        df_b["lesion_id"] = df_a["lesion_id"].values
+        df_b["y_true"] = df_a["y_true"].values
+        return df_a, df_b
+
+    def test_returns_three_floats(self, df_pair):
+        df_a, df_b = df_pair
+        result = paired_cluster_bootstrap(df_a, df_b, metric="macro_f1", n_boot=50, seed=0)
+        assert len(result) == 3
+        diff, lo, hi = result
+        assert isinstance(diff, float)
+        assert isinstance(lo, float)
+        assert isinstance(hi, float)
+
+    def test_ci_contains_point(self, df_pair):
+        df_a, df_b = df_pair
+        diff, lo, hi = paired_cluster_bootstrap(df_a, df_b, metric="macro_f1", n_boot=100, seed=0)
+        assert lo <= diff <= hi, f"Point diff {diff} outside CI [{lo}, {hi}]"
+
+    def test_deterministic_fixed_seed(self, df_pair):
+        df_a, df_b = df_pair
+        r1 = paired_cluster_bootstrap(df_a, df_b, metric="macro_f1", n_boot=80, seed=3)
+        r2 = paired_cluster_bootstrap(df_a, df_b, metric="macro_f1", n_boot=80, seed=3)
+        assert r1 == r2
+
+    def test_different_seeds_differ(self, df_pair):
+        df_a, df_b = df_pair
+        r1 = paired_cluster_bootstrap(df_a, df_b, metric="macro_f1", n_boot=200, seed=1)
+        r2 = paired_cluster_bootstrap(df_a, df_b, metric="macro_f1", n_boot=200, seed=2)
+        assert r1 != r2
+
+    def test_zero_diff_for_identical_frames(self):
+        """Paired difference for identical predictions must be 0."""
+        df = _make_pred_df(n_per_class=10, perfect=False, seed=5)
+        diff, lo, hi = paired_cluster_bootstrap(df, df, metric="macro_f1", n_boot=50, seed=0)
+        assert diff == pytest.approx(0.0)
+        assert lo == pytest.approx(0.0)
+        assert hi == pytest.approx(0.0)
+
+    def test_antisymmetric(self, df_pair):
+        """Swapping A and B negates the point estimate."""
+        df_a, df_b = df_pair
+        diff_ab, _, _ = paired_cluster_bootstrap(df_a, df_b, metric="macro_f1", n_boot=50, seed=0)
+        diff_ba, _, _ = paired_cluster_bootstrap(df_b, df_a, metric="macro_f1", n_boot=50, seed=0)
+        assert diff_ab == pytest.approx(-diff_ba, abs=1e-10)
+
+    def test_no_shared_lesions_raises(self):
+        df_a = _make_pred_df(n_per_class=5, perfect=False, seed=0)
+        df_b = _make_pred_df(n_per_class=5, perfect=False, seed=1)
+        # Override lesion_ids so there is no overlap.
+        df_b["lesion_id"] = [f"UNIQ_B_{i}" for i in range(len(df_b))]
+        with pytest.raises(ValueError, match="share no lesion_id"):
+            paired_cluster_bootstrap(df_a, df_b, metric="macro_f1", n_boot=10, seed=0)
+
+    def test_unknown_metric_raises(self, df_pair):
+        df_a, df_b = df_pair
+        with pytest.raises(ValueError, match="Unknown metric"):
+            paired_cluster_bootstrap(df_a, df_b, metric="bad_metric", n_boot=10, seed=0)
+
+    def test_recall_metric(self, df_pair):
+        df_a, df_b = df_pair
+        diff, lo, hi = paired_cluster_bootstrap(df_a, df_b, metric="mel", n_boot=50, seed=0)
+        assert lo <= diff <= hi
