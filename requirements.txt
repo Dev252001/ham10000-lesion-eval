@@ -1,18 +1,24 @@
-﻿# Core data / ML
-pandas
-numpy
-scikit-learn
-matplotlib
-Pillow
+﻿# -----------------------------------------------------------------------
+# requirements.txt – reproducible CPU-only install for local development
+# and CI.  Colab pre-installs torch/torchvision; see the note below.
+# -----------------------------------------------------------------------
 
-# Explainability
-grad-cam
+# Core data / ML
+pandas>=1.5,<4
+numpy>=1.24,<3
+scikit-learn>=1.2,<2
+matplotlib>=3.6,<4
+Pillow>=9.0,<13
 
-# Dataset download
-kaggle
+# Explainability (optional — tests skip gracefully without it)
+grad-cam>=1.4
+
+# Dataset download (only needed in Colab notebooks)
+kaggle>=1.5
 
 # Testing
-pytest
+pytest>=7.0,<11
 
 # torch and torchvision are NOT pinned here; Google Colab pre-installs them.
-# Install locally with: pip install torch torchvision
+# The training runs used torch==2.11.0+cu130 and torchvision==0.26.0+cu130.
+# Install locally with: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
