@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this code, please cite it as below."
 title: "HAM10000 Skin-Lesion Classification — Leakage-Aware Evaluation"
 authors:
-  - family-names: "Dev"
-    given-names: "Parth"
+  - family-names: "Devashish"
+    given-names: "Pandey"
     github: "Dev252001"
 repository-code: "https://github.com/Dev252001/ham10000-lesion-eval"
 license: MIT
