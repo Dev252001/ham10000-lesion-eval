@@ -225,11 +225,7 @@ See the manual checklist for instructions to produce them.
 <!-- AUTHOR TO CONFIRM -->
 ## Development Notes
 
-Parts of the code in this repository — specifically test scaffolding,
-script structure, and documentation drafts — were written with assistance
-from an AI coding assistant (IBM Bob).  The evaluation protocol, split
-design, model selection, and scientific interpretation were designed and
-reviewed by me.
+The project was primarily developed by me, including the design of the evaluation protocol, lesion-grouped data-splitting strategy, model selection, training and evaluation of the deep-learning architectures, and interpretation of the results. I also used Claude, an AI, for limited support with parts of the test scaffolding, script organisation, debugging and documentation. All key methodological decisions and the interpretation of the experimental findings were made and reviewed by me.
 <!-- /AUTHOR TO CONFIRM -->
 
 ---
